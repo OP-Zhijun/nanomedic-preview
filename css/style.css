@@ -409,7 +409,93 @@ section { padding: 120px 56px; }
 }
 
 /* ══════════════════════════════════════════════════
-   RESEARCH PILLAR BANDS — signature design element
+   TEAM STRIP — avatar constellation
+   ══════════════════════════════════════════════════ */
+.team-strip {
+  background: var(--navy);
+  padding: 72px 56px 88px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.team-strip-inner { max-width: 1200px; margin: 0 auto; }
+.team-strip-meta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; margin-bottom: 40px; flex-wrap: wrap;
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted);
+}
+.team-strip-label { color: var(--teal); }
+.team-strip-rule { flex: 0 0 48px; height: 1px; background: rgba(46,196,182,0.4); }
+.team-strip-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; font-style: italic;
+  text-transform: none; letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.65);
+}
+.team-avatars {
+  display: flex; justify-content: center; align-items: center;
+  gap: 0; flex-wrap: nowrap; padding: 0 20px;
+  margin-bottom: 28px; text-decoration: none;
+}
+.team-avatar {
+  display: inline-block;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  border: 2px solid var(--navy);
+  box-shadow: 0 0 0 1px rgba(46,196,182,0.25);
+  margin-left: -12px;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.2,0,0.1,1), box-shadow 0.35s ease, filter 0.3s ease, opacity 0.15s ease;
+  cursor: pointer;
+  filter: saturate(0.85) brightness(0.9);
+}
+.team-avatar:first-child { margin-left: 0; }
+.team-avatars:hover .team-avatar { opacity: 0.45; transition: opacity 0.3s; }
+.team-avatar:hover {
+  transform: translateY(-12px) scale(1.12);
+  box-shadow: 0 0 0 2px var(--teal), 0 8px 24px rgba(0,0,0,0.5);
+  z-index: 10; opacity: 1 !important;
+  filter: saturate(1.05) brightness(1);
+}
+.team-avatar::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal); background: var(--deep);
+  padding: 6px 12px;
+  border: 1px solid rgba(46,196,182,0.3);
+  white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.25s ease;
+  z-index: 20;
+}
+.team-avatar:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.team-strip-cta {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border-bottom: 1px solid rgba(46,196,182,0.4);
+  padding-bottom: 4px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.team-strip-cta:hover {
+  color: var(--white);
+  border-bottom-color: var(--teal);
+}
+
+/* ══════════════════════════════════════════════════
+   RESEARCH PILLAR BANDS — Mission Control aesthetic
    ══════════════════════════════════════════════════ */
 .pillar-bands {
   background: var(--navy);
@@ -424,77 +510,145 @@ section { padding: 120px 56px; }
   padding: 72px 56px;
   min-height: 240px;
   overflow: hidden;
-  transition: background 0.5s ease;
+  transition: background 0.5s ease, min-height 0.4s ease;
   text-decoration: none;
   color: inherit;
   border-bottom: 1px solid var(--border);
 }
 .pillar-band:last-child { border-bottom: none; }
-.pillar-band:hover { background: rgba(46,196,182,0.03); }
-.pillar-band-num {
+.pillar-band:hover { background: rgba(46,196,182,0.04); }
+
+/* SIGNATURE band — Space Medicine */
+.pillar-band--signature {
+  min-height: 320px;
+  background: linear-gradient(180deg, rgba(46,196,182,0.025) 0%, rgba(74,144,196,0.04) 100%);
+  border-top: 1px solid rgba(46,196,182,0.25);
+  border-bottom: 1px solid rgba(46,196,182,0.25);
+}
+.pillar-band--signature:hover {
+  background: linear-gradient(180deg, rgba(46,196,182,0.06) 0%, rgba(74,144,196,0.08) 100%);
+}
+.pillar-band--signature .pillar-band-ko {
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  letter-spacing: -0.02em;
+}
+.pillar-band-badge {
+  position: absolute;
+  top: 24px;
+  left: 56px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--teal);
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid rgba(46,196,182,0.4);
+  z-index: 3;
+}
+
+/* Big numeral — appears stronger on hover */
+.pillar-band-bignum {
+  position: absolute;
+  right: 56px; top: 50%;
+  transform: translateY(-50%);
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  font-style: italic;
+  font-size: 11rem; font-weight: 300; font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(46,196,182,0.18);
+  line-height: 1;
+  pointer-events: none; user-select: none;
+  z-index: 1;
+  transition: -webkit-text-stroke 0.5s ease, transform 0.5s ease;
+  letter-spacing: -0.04em;
+}
+.pillar-band:hover .pillar-band-bignum {
+  -webkit-text-stroke: 1.5px rgba(46,196,182,0.5);
+  transform: translateY(-50%) translateX(-8px);
+}
+.pillar-band--signature .pillar-band-bignum {
+  font-size: 15rem;
+  -webkit-text-stroke: 1px rgba(46,196,182,0.25);
+}
+
+.pillar-band-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   color: var(--teal);
   min-width: 44px;
   flex: 0 0 auto;
-  opacity: 0.7;
-  position: relative;
-  z-index: 2;
+  opacity: 0.8;
+  position: relative; z-index: 2;
+  padding: 4px 10px 4px 0;
+  border-right: 1px solid rgba(46,196,182,0.3);
+  margin-right: 8px;
 }
 .pillar-band-title {
   flex: 1;
-  padding: 0 48px;
-  max-width: 760px;
-  position: relative;
-  z-index: 2;
+  padding: 0 40px;
+  max-width: 680px;
+  position: relative; z-index: 2;
 }
 .pillar-band-ko {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 4.5vw, 3.6rem);
-  font-style: italic;
-  font-weight: 300;
+  font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+  font-style: italic; font-weight: 300;
   color: var(--white);
-  line-height: 1;
+  line-height: 1.05;
   margin-bottom: 14px;
   letter-spacing: -0.01em;
   transition: color 0.4s ease, transform 0.4s ease;
 }
+.pillar-band-ko em {
+  font-style: italic; font-weight: 300;
+  color: rgba(46,196,182,0.85);
+}
 .pillar-band:hover .pillar-band-ko {
   color: var(--teal);
-  transform: translateX(6px);
+  transform: translateX(8px);
 }
 .pillar-band-en {
   font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em; text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(163,184,204,0.15);
+  display: inline-block;
+  padding-right: 40px;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+.pillar-band:hover .pillar-band-en {
+  color: var(--teal);
+  border-bottom-color: rgba(46,196,182,0.5);
 }
 .pillar-band-desc {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.98rem;
-  line-height: 1.7;
+  line-height: 1.75;
   color: rgba(255,255,255,0.58);
-  max-width: 580px;
+  max-width: 540px;
   font-weight: 300;
   transition: color 0.4s ease;
 }
 .pillar-band:hover .pillar-band-desc {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.9);
 }
+
 .pillar-band-motion {
   position: absolute;
   inset: 0;
   z-index: 0;
   opacity: 0.35;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease, animation-duration 0.5s ease;
 }
-.pillar-band:hover .pillar-band-motion { opacity: 0.7; }
+.pillar-band:hover .pillar-band-motion { opacity: 0.8; }
+.pillar-band--signature .pillar-band-motion { opacity: 0.55; }
+.pillar-band--signature:hover .pillar-band-motion { opacity: 1; }
 
-/* Band 1 — Drug Delivery: drifting particles */
 .pillar-band-motion--particles {
   background-image:
     radial-gradient(circle, rgba(46,196,182,0.3) 1.5px, transparent 2px),
@@ -503,27 +657,29 @@ section { padding: 120px 56px; }
   background-position: 0 0, 45px 65px;
   animation: particleDrift 30s linear infinite;
 }
+.pillar-band:hover .pillar-band-motion--particles { animation-duration: 12s; }
 @keyframes particleDrift {
   to { background-position: 90px 90px, 175px 195px; }
 }
 
-/* Band 2 — Space Medicine: orbital arc */
 .pillar-band-motion--orbit {
   background-image:
-    radial-gradient(ellipse 140% 70% at 50% 120%, transparent 49.5%, rgba(46,196,182,0.35) 50%, rgba(46,196,182,0.35) 50.25%, transparent 50.8%),
-    radial-gradient(ellipse 110% 55% at 50% 135%, transparent 49.6%, rgba(74,144,196,0.22) 50%, rgba(74,144,196,0.22) 50.2%, transparent 50.6%);
-  animation: orbitPulse 10s ease-in-out infinite;
+    radial-gradient(ellipse 140% 70% at 50% 120%, transparent 49.5%, rgba(46,196,182,0.4) 50%, rgba(46,196,182,0.4) 50.25%, transparent 50.8%),
+    radial-gradient(ellipse 110% 55% at 50% 135%, transparent 49.6%, rgba(74,144,196,0.25) 50%, rgba(74,144,196,0.25) 50.2%, transparent 50.6%),
+    radial-gradient(ellipse 160% 80% at 50% 110%, transparent 49.7%, rgba(46,196,182,0.15) 50%, rgba(46,196,182,0.15) 50.12%, transparent 50.4%);
+  animation: orbitPulse 12s ease-in-out infinite;
 }
+.pillar-band:hover .pillar-band-motion--orbit { animation-duration: 5s; }
 @keyframes orbitPulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.9; }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
-/* Band 3 — Smart Devices: pulsing beat */
 .pillar-band-motion--pulse {
-  background-image: radial-gradient(circle at 88% 50%, rgba(46,196,182,0.4) 0%, transparent 12%);
+  background-image: radial-gradient(circle at 88% 50%, rgba(46,196,182,0.45) 0%, transparent 12%);
   animation: devicePulse 2.2s ease-in-out infinite;
 }
+.pillar-band:hover .pillar-band-motion--pulse { animation-duration: 0.8s; }
 @keyframes devicePulse {
   0%, 65%, 100% { opacity: 0.3; }
   15% { opacity: 0.95; }
@@ -532,17 +688,292 @@ section { padding: 120px 56px; }
 
 .pillar-band-arrow {
   font-family: 'DM Mono', monospace;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--teal);
   flex: 0 0 auto;
   transition: transform 0.4s ease, opacity 0.4s ease;
   opacity: 0.5;
-  position: relative;
-  z-index: 2;
+  position: relative; z-index: 2;
+  margin-left: auto;
 }
 .pillar-band:hover .pillar-band-arrow {
-  transform: translateX(10px);
+  transform: translateX(14px);
   opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════
+   HERO TELEMETRY — mission-control live readout
+   ══════════════════════════════════════════════════ */
+.hero-telemetry {
+  position: absolute;
+  bottom: 48px; left: 56px; right: 56px;
+  max-width: 780px;
+  z-index: 3;
+  padding-top: 20px;
+  border-top: 1px solid rgba(46,196,182,0.25);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.telemetry-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.telemetry-label { color: var(--teal); font-weight: 500; }
+.telemetry-value {
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.telemetry-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-right: 10px;
+  box-shadow: 0 0 0 3px rgba(46,196,182,0.2), 0 0 10px rgba(46,196,182,0.6);
+  animation: telemetryBeat 2s ease-in-out infinite;
+}
+@keyframes telemetryBeat {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.telemetry-ticker {
+  display: inline-flex;
+  flex-direction: column;
+  height: 1.4em;
+  overflow: hidden;
+  animation: telemetryCycle 16s ease-in-out infinite;
+}
+.telemetry-ticker span {
+  display: block;
+  min-height: 1.4em;
+}
+@keyframes telemetryCycle {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-1.4em); }
+  50%, 70% { transform: translateY(-2.8em); }
+  75%, 95% { transform: translateY(-4.2em); }
+  100% { transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════════
+   SITE COORDINATES CARD — replaces generic map
+   ══════════════════════════════════════════════════ */
+.site-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.site-card-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(46,196,182,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,196,182,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 90% 70% at 60% 45%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 60% 45%, black 40%, transparent 85%);
+}
+.site-card-meta {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.site-card-label { color: var(--teal); }
+.site-card-code { color: var(--muted); }
+.site-card-coords {
+  position: relative; z-index: 2;
+  margin-top: auto;
+  padding-top: 28px;
+}
+.coord-row {
+  display: flex; align-items: baseline; gap: 16px;
+  border-bottom: 1px dashed rgba(46,196,182,0.15);
+  padding: 6px 0;
+}
+.coord-row:last-of-type { border-bottom: none; }
+.coord-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: 0 0 36px;
+}
+.coord-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--white);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+.site-card-marker {
+  position: absolute;
+  top: 40%; left: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+}
+.site-card-crosshair {
+  position: relative;
+  width: 60px; height: 60px;
+}
+.crosshair-h, .crosshair-v {
+  position: absolute;
+  background: rgba(46,196,182,0.6);
+}
+.crosshair-h {
+  top: 50%; left: -18px; right: -18px;
+  height: 1px;
+  transform: translateY(-50%);
+}
+.crosshair-v {
+  left: 50%; top: -18px; bottom: -18px;
+  width: 1px;
+  transform: translateX(-50%);
+}
+.crosshair-dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(46,196,182,0.2), 0 0 16px rgba(46,196,182,0.6);
+  animation: markerPulse 3s ease-in-out infinite;
+}
+.crosshair-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(46,196,182,0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: markerRing 3s ease-out infinite;
+}
+@keyframes markerPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(46,196,182,0.2), 0 0 16px rgba(46,196,182,0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(46,196,182,0.15), 0 0 28px rgba(46,196,182,0.9); }
+}
+@keyframes markerRing {
+  0% { width: 14px; height: 14px; opacity: 1; }
+  100% { width: 60px; height: 60px; opacity: 0; }
+}
+.site-card-marker-label {
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(46,196,182,0.85);
+  white-space: nowrap;
+}
+.site-card-open {
+  position: absolute;
+  bottom: 20px; right: 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border-bottom: 1px solid rgba(46,196,182,0.4);
+  padding-bottom: 2px;
+  z-index: 4;
+  transition: color 0.3s, border-color 0.3s, transform 0.3s;
+}
+.site-card-open:hover {
+  color: var(--white);
+  border-bottom-color: var(--white);
+  transform: translateX(3px);
+}
+
+/* Responsive — new sections */
+@media (max-width: 1024px) {
+  .pillar-band { padding: 56px 40px; }
+  .pillar-band--signature { min-height: 280px; }
+  .pillar-band-bignum { font-size: 9rem; right: 40px; }
+  .pillar-band--signature .pillar-band-bignum { font-size: 12rem; }
+  .pillar-band-badge { top: 20px; left: 40px; }
+  .team-strip { padding: 64px 40px 72px; }
+  .team-avatar { width: 56px; height: 56px; margin-left: -10px; }
+  .hero-telemetry { left: 40px; right: 40px; bottom: 36px; }
+}
+@media (max-width: 768px) {
+  .pillar-band {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 56px 22px 48px;
+    min-height: auto;
+  }
+  .pillar-band--signature { min-height: auto; padding-top: 68px; }
+  .pillar-band-num {
+    position: absolute;
+    top: 24px; left: 22px;
+    min-width: 0;
+    padding: 4px 10px 4px 0;
+    margin: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(46,196,182,0.3);
+  }
+  .pillar-band-badge { top: 24px; left: 56px; }
+  .pillar-band-title { padding: 32px 0 0; max-width: 100%; }
+  .pillar-band-ko { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .pillar-band--signature .pillar-band-ko { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .pillar-band-desc { font-size: 0.95rem; line-height: 1.75; max-width: 100%; }
+  .pillar-band-bignum {
+    right: 22px; font-size: 6rem; top: 20px; transform: none;
+  }
+  .pillar-band--signature .pillar-band-bignum { font-size: 7.5rem; }
+  .pillar-band:hover .pillar-band-bignum { transform: translateX(-4px); }
+  .pillar-band-arrow { display: none; }
+
+  .team-strip { padding: 52px 20px 60px; }
+  .team-avatar { width: 44px; height: 44px; margin-left: -8px; border-width: 1.5px; }
+  .team-avatar:hover { transform: translateY(-8px) scale(1.18); }
+  .team-strip-meta { gap: 12px; font-size: 0.62rem; margin-bottom: 28px; }
+  .team-strip-rule { display: none; }
+  .team-strip-count { font-size: 0.88rem; }
+
+  .hero-telemetry {
+    position: static;
+    margin-top: 40px;
+    left: auto; right: auto;
+    padding: 20px 0 0;
+  }
+  .telemetry-row { grid-template-columns: 44px 1fr; gap: 14px; }
+  .telemetry-value { font-size: 0.78rem; }
+
+  .site-card { aspect-ratio: 5 / 4; padding: 22px 22px; }
+  .coord-value { font-size: 1.15rem; }
+  .site-card-marker { top: 36%; }
 }
 
 /* ── INTRO SECTION ── */

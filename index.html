@@ -40,12 +40,35 @@
     <div class="hero-dots"></div>
     <div class="hero-content">
       <div class="hero-tag fade-in">Inha University College of Medicine</div>
-      <h1 class="fade-in">Medicine that travels<br>from <em>Earth</em> to <em>orbit</em><br>and back.</h1>
-      <h2 class="fade-in">Nanomedicine &times; Space Medicine &middot; Department of Biomedical Science</h2>
-      <p class="fade-in">We engineer drug-delivery platforms and stimuli-responsive implants that work under the extreme conditions of both clinical bedside and microgravity &mdash; using spaceflight as an accelerated-aging environment to discover new therapies for neurodegenerative disease on Earth.</p>
+      <h1 class="fade-in">Where <em>spaceflight</em><br>becomes a laboratory<br>for <em>aging</em>.</h1>
+      <h2 class="fade-in">Drug Delivery &middot; Space Medicine &middot; Smart Implantable Devices</h2>
+      <p class="fade-in">We exploit the extreme conditions of microgravity and cosmic radiation to accelerate what takes decades on Earth &mdash; using space as a compressed-time model to engineer therapies for neurodegenerative disease, cancer, and age-related decline.</p>
       <div class="hero-ctas fade-in">
         <a href="research.html" class="btn-primary">Our Research</a>
-        <a href="publication-patent.html" class="btn-outline">Publications</a>
+        <a href="publication-patent.html" class="btn-outline">97 Publications</a>
+      </div>
+    </div>
+
+    <!-- Mission-control telemetry readout (bold signature) -->
+    <div class="hero-telemetry fade-in" aria-hidden="true">
+      <div class="telemetry-row">
+        <span class="telemetry-label">Active</span>
+        <span class="telemetry-value"><span class="telemetry-dot"></span> Lab Operations &middot; Incheon, KR</span>
+      </div>
+      <div class="telemetry-row">
+        <span class="telemetry-label">Pubs</span>
+        <span class="telemetry-value">97 peer-reviewed &middot; 2005&ndash;2026</span>
+      </div>
+      <div class="telemetry-row">
+        <span class="telemetry-label">Now</span>
+        <span class="telemetry-value">
+          <span class="telemetry-ticker">
+            <span>Studying cGAS&ndash;STING in BBB cells under simulated microgravity</span>
+            <span>Engineering mitochondria-targeted senolytic nanoparticles</span>
+            <span>Developing stimuli-responsive implants for pancreatic cancer</span>
+            <span>Characterizing neural circuit changes in 3D clinostat cultures</span>
+          </span>
+        </span>
       </div>
     </div>
   </section>
@@ -77,12 +100,42 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════
+       THE TEAM — avatar constellation
+       ════════════════════════════════════════════════════════ -->
+  <section class="team-strip">
+    <div class="team-strip-inner">
+      <div class="team-strip-meta">
+        <span class="team-strip-label">The Team</span>
+        <span class="team-strip-rule"></span>
+        <span class="team-strip-count">Eleven researchers &middot; One mission</span>
+      </div>
+
+      <a href="member.html" class="team-avatars" aria-label="Meet the team">
+        <span class="team-avatar" style="background-image: url('assets/images/members/prof-yang-hires.png')" data-name="Prof. Su-Geun Yang"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/lee-junghan.png')" data-name="LEE, Jung Han"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/yoo-hyejin.jpg')" data-name="Yoo, Hye Jin"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/kim-jinmo.png')" data-name="Kim, Jin Mo"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/arjaree.png')" data-name="Arjaree Jobdeedamrong"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/truong-ngocthuan.jpg')" data-name="Truong Ngoc Thuan"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/nattha-new.png')" data-name="Nattha Suwanprakorn"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/ryu-dahee.jpg')" data-name="Dahee Ryu"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/junhyun.png')" data-name="Park Jun Hyeon"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/zhijun-zhao.png')" data-name="Zhijun ZHAO"></span>
+        <span class="team-avatar" style="background-image: url('assets/images/members/obok.jpg')" data-name="O-bok"></span>
+      </a>
+
+      <a href="member.html" class="team-strip-cta">Meet the researchers &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
        RESEARCH PILLAR BANDS — signature visual
        ════════════════════════════════════════════════════════ -->
   <section class="pillar-bands">
 
-    <a href="research.html#drug-delivery" class="pillar-band">
+    <a href="research.html#drug-delivery" class="pillar-band" data-pillar="1">
       <span class="pillar-band-motion pillar-band-motion--particles"></span>
+      <span class="pillar-band-bignum">01</span>
       <span class="pillar-band-num">I</span>
       <div class="pillar-band-title">
         <div class="pillar-band-en">Drug Delivery</div>
@@ -92,8 +145,10 @@
       <span class="pillar-band-arrow">&rarr;</span>
     </a>
 
-    <a href="research.html#space-medicine" class="pillar-band">
+    <a href="research.html#space-medicine" class="pillar-band pillar-band--signature" data-pillar="2">
       <span class="pillar-band-motion pillar-band-motion--orbit"></span>
+      <span class="pillar-band-badge">Signature Program</span>
+      <span class="pillar-band-bignum">02</span>
       <span class="pillar-band-num">II</span>
       <div class="pillar-band-title">
         <div class="pillar-band-en">Space Medicine</div>
@@ -103,8 +158,9 @@
       <span class="pillar-band-arrow">&rarr;</span>
     </a>
 
-    <a href="research.html#smart-devices" class="pillar-band">
+    <a href="research.html#smart-devices" class="pillar-band" data-pillar="3">
       <span class="pillar-band-motion pillar-band-motion--pulse"></span>
+      <span class="pillar-band-bignum">03</span>
       <span class="pillar-band-num">III</span>
       <div class="pillar-band-title">
         <div class="pillar-band-en">Smart Medical Devices</div>
@@ -114,38 +170,6 @@
       <span class="pillar-band-arrow">&rarr;</span>
     </a>
 
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════
-       연구 분야 및 내용 · RESEARCH AREAS (detailed)
-       ════════════════════════════════════════════════════════ -->
-  <section style="background: var(--deep);">
-    <div class="section-label fade-in">연구 분야 및 내용 · Research Areas</div>
-    <h2 class="section-title fade-in">Core <em>Programs</em></h2>
-
-    <div class="content-block fade-in">
-      <h3>1. [약물전달] 고성능 하이브리드 DDS 플랫폼 구축</h3>
-      <ul>
-        <li><strong>항암 백신</strong> : 항암면역치료 회피반응의 극복을 위한 타겟의 발굴 및 항암백신 설계</li>
-        <li><strong>세포 소기관 타겟팅</strong> : 미토콘드리아의 기능을 조절하여 노화 세포의 대사를 정상화하거나(re-engineering), 암세포의 사멸을 유도하는 <strong>오가넬 타겟팅(Organelle-targeting)</strong> 기술 고도화</li>
-        <li><strong>복합 항암 약물전달체</strong> : 종양 미세환경(TME)에 감응하여 유전자 치료제와 화학 항암제를 순차적으로 방출하는 <strong>지능형 고분자 나노 입자</strong> 개발</li>
-      </ul>
-    </div>
-
-    <div class="content-block fade-in">
-      <h3>2. [우주 의학] 우주 극한 환경 대응 헬스케어 솔루션</h3>
-      <ul>
-        <li><strong>우주인 헬스케어 및 지상질환 연계</strong> : 우주가속노화 환경을 이용한 뇌신경 및 근육 퇴행성 질환에 대한 <strong>항노화</strong> 타겟 발굴 및 치료약물 <strong>스크리닝</strong></li>
-        <li><strong>스마트 약물방출 생체삽입형 의료기기</strong> : 초음파, 자기장, 광원 등 외부 에너지 자극에 반응하여 필요할 때만 약물을 방출하는 <strong>자극 감응형(Stimuli-responsive)</strong> 고분자 코팅 의료기기 설계</li>
-      </ul>
-    </div>
-
-    <div class="content-block fade-in">
-      <h3>3. [의료기기] 자극 감응형 에너지 전달 시스템 최적화</h3>
-      <ul>
-        <li><strong>스마트 약물방출 생체삽입형 의료기기</strong> : 초음파, 자기장, 광원 등 외부 에너지 자극에 반응하여 필요할 때만 약물을 방출하는 <strong>자극 감응형(Stimuli-responsive)</strong> 고분자 코팅 의료기기 설계</li>
-      </ul>
-    </div>
   </section>
 
   <div class="divider"></div>
@@ -184,14 +208,40 @@
     </div>
 
     <div class="fade-in">
-      <div class="map-embed">
-        <iframe
-          src="https://www.google.com/maps?q=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%A4%91%EA%B5%AC+%EC%84%9C%ED%95%B4%EB%8C%80%EB%A1%9C+366+%EC%A0%95%EC%84%9D%EB%B9%8C%EB%94%A9&output=embed"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Inha University College of Medicine location">
-        </iframe>
+      <div class="site-card">
+        <div class="site-card-grid" aria-hidden="true"></div>
+
+        <div class="site-card-meta">
+          <span class="site-card-label">Site &middot; Site</span>
+          <span class="site-card-code">INHA-BMS-B501</span>
+        </div>
+
+        <div class="site-card-marker">
+          <div class="site-card-crosshair">
+            <span class="crosshair-h"></span>
+            <span class="crosshair-v"></span>
+            <span class="crosshair-dot"></span>
+            <span class="crosshair-ring"></span>
+          </div>
+          <div class="site-card-marker-label">Jungsuk Bldg B-501</div>
+        </div>
+
+        <div class="site-card-coords">
+          <div class="coord-row">
+            <span class="coord-label">Lat</span>
+            <span class="coord-value">37.4563&deg; N</span>
+          </div>
+          <div class="coord-row">
+            <span class="coord-label">Lon</span>
+            <span class="coord-value">126.6307&deg; E</span>
+          </div>
+          <div class="coord-row">
+            <span class="coord-label">Alt</span>
+            <span class="coord-value">~7 m ASL</span>
+          </div>
+        </div>
+
+        <a href="https://www.google.com/maps?q=37.4563,126.6307" target="_blank" rel="noopener noreferrer" class="site-card-open">Open in Maps &rarr;</a>
       </div>
     </div>
   </section>
