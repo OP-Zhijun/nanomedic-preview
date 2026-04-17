@@ -962,8 +962,14 @@ section { padding: 120px 56px; }
   .team-strip-rule { display: none; }
   .team-strip-count { font-size: 0.88rem; }
 
+  /* Hero must stack children vertically on mobile —
+     otherwise static telemetry becomes a flex sibling
+     of .hero-content and overlaps horizontally */
+  .hero { flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-content { width: 100%; }
   .hero-telemetry {
     position: static;
+    width: 100%;
     margin-top: 40px;
     left: auto; right: auto;
     padding: 20px 0 0;
