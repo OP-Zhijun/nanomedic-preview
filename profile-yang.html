@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prof. Su-Geun Yang — 인하대학교 의과대학 교수. Personal faculty profile with contact, education, and selected publications.">
+  <title>Prof. Su-Geun Yang — Personal Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ── FACULTY CARD LAYOUT ── */
+    .faculty-wrap {
+      padding: 120px 40px 80px;
+      background:
+        radial-gradient(ellipse 60% 60% at 75% 30%, rgba(26,58,107,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 45% at 15% 80%, rgba(46,196,182,0.04) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1628 0%, #0d1f3c 60%, #071220 100%);
+      min-height: 100vh;
+    }
+    .faculty-card {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      background: var(--deep);
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+      overflow: hidden;
+    }
+    @media (max-width: 860px) {
+      .faculty-card { grid-template-columns: 1fr; }
+    }
+
+    /* Left sidebar */
+    .faculty-sidebar {
+      background: linear-gradient(170deg, #0c1e3a 0%, #071020 100%);
+      padding: 48px 32px 40px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .faculty-sidebar::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal) 0%, var(--accent) 100%);
+    }
+    .faculty-photo {
+      width: 100%; aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border: 1px solid rgba(46,196,182,0.25);
+      margin-bottom: 28px;
+    }
+    .faculty-name-ko {
+      font-family: 'Noto Serif KR', 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 500;
+      color: var(--white); line-height: 1.2;
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+    .faculty-name-ko.placeholder {
+      color: var(--muted); opacity: 0.5; font-style: italic;
+      font-size: 1rem;
+    }
+    .faculty-name-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 400; font-style: italic;
+      color: var(--teal); line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .faculty-title-block {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .faculty-title-ko {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.95rem; color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    .faculty-title-en {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .contact-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--teal); opacity: 0.3;
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .contact-row dt {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem; letter-spacing: 0.1em;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+    .contact-row dd {
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+    .contact-row dd a { color: var(--accent); }
+    .contact-row dd a:hover { color: var(--teal); }
+    .contact-row dd.empty { color: var(--muted); opacity: 0.4; font-style: italic; }
+    .contact-row dd .website-link {
+      color: var(--teal);
+      border-bottom: 1px solid rgba(46,196,182,0.35);
+      padding-bottom: 1px;
+    }
+    .contact-row dd .website-link:hover {
+      color: var(--white); border-color: var(--white);
+    }
+
+    /* Right main */
+    .faculty-main {
+      padding: 56px 48px 48px;
+    }
+    .faculty-section {
+      margin-bottom: 48px;
+    }
+    .faculty-section:last-child { margin-bottom: 0; }
+    .faculty-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--white);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 14px;
+    }
+    .faculty-section h3 .kr {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 500;
+      font-size: 1.35rem;
+      color: var(--teal);
+    }
+    .faculty-section h3 .sep {
+      color: var(--muted); opacity: 0.4; font-weight: 300;
+    }
+    .faculty-section h3 .en {
+      font-style: italic;
+    }
+
+    .cv-list {
+      list-style: none; padding: 0;
+    }
+    .cv-list li {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+    .cv-list li:last-child { border-bottom: none; }
+    .cv-list .year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      padding-top: 2px;
+    }
+    .cv-list .content {
+      color: var(--text-secondary);
+    }
+    .cv-list .content .kr {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.92rem; color: var(--white);
+    }
+    .cv-list .content .en {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; color: var(--muted);
+      margin-top: 2px;
+      font-style: italic;
+      display: block;
+    }
+
+    /* Major publications */
+    .pub-list {
+      list-style: none; padding: 0;
+      counter-reset: pub;
+    }
+    .pub-item {
+      counter-increment: pub;
+      display: grid;
+      grid-template-columns: 42px 1fr 88px;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: start;
+    }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 300;
+      color: var(--teal); line-height: 1;
+    }
+    .pub-num::before {
+      content: counter(pub, decimal-leading-zero);
+    }
+    .pub-body .pub-title {
+      font-size: 0.98rem; color: var(--white);
+      line-height: 1.5; margin-bottom: 6px;
+      font-weight: 400;
+    }
+    .pub-body .pub-authors {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.55; margin-bottom: 3px;
+    }
+    .pub-body .pub-authors .self {
+      color: var(--teal); font-weight: 500;
+    }
+    .pub-body .pub-journal {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .pub-stats {
+      text-align: right;
+    }
+    .pub-cites {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted); letter-spacing: 0.1em;
+    }
+    .pub-cites-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.12em;
+      color: var(--muted); text-transform: uppercase;
+      opacity: 0.7; display: block; margin-top: 1px;
+    }
+    @media (max-width: 720px) {
+      .faculty-main { padding: 40px 28px; }
+      .pub-item { grid-template-columns: 32px 1fr; gap: 14px; }
+      .pub-stats { grid-column: 2; text-align: left; margin-top: 6px; }
+      .pub-cites { display: inline; font-size: 1.1rem; margin-right: 10px; }
+      .pub-year { display: inline; }
+      .pub-cites-label { display: inline; margin-left: 4px; }
+      .cv-list li { grid-template-columns: 1fr; gap: 4px; }
+    }
+
+    /* Cross-link footer inside card */
+    .faculty-crosslink {
+      margin-top: 56px;
+      padding: 20px 24px;
+      background: rgba(46,196,182,0.06);
+      border-left: 2px solid var(--teal);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .faculty-crosslink-text {
+      font-size: 0.88rem; color: var(--text-secondary);
+    }
+    .faculty-crosslink a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal);
+      padding-bottom: 2px;
+    }
+    .faculty-crosslink a:hover { color: var(--white); border-color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav>
+    <a class="nav-logo" href="index.html">INHA <span>NANOMEDIC</span></a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="member.html" class="active">Members</a></li>
+      <li><a href="publication-patent.html">Publications</a></li>
+      <li><a href="lab-facilities.html">Facilities</a></li>
+      <li><a href="lab-activities.html">Gallery</a></li>
+      <li><a href="benefit.html">Benefit</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ FACULTY CARD ═══ -->
+  <section class="faculty-wrap">
+    <div class="faculty-card fade-in">
+
+      <!-- ── Sidebar ── -->
+      <aside class="faculty-sidebar">
+        <img class="faculty-photo" src="assets/images/members/prof-yang-hires.png" alt="Prof. Su-Geun Yang">
+
+        <!-- Korean name placeholder — user to fill in Hangul -->
+        <div class="faculty-name-ko placeholder" title="Korean name pending">[한글 이름]</div>
+        <div class="faculty-name-en">Yang, Su-Geun, Ph.D</div>
+
+        <div class="faculty-title-block">
+          <div class="faculty-title-ko">교수 · 인하대학교 의과대학</div>
+          <div class="faculty-title-en">Professor · Inha University College of Medicine</div>
+        </div>
+
+        <div class="contact-label">Contact</div>
+        <dl style="margin: 0;">
+          <div class="contact-row">
+            <dt>TEL</dt>
+            <dd class="empty">—</dd>
+          </div>
+          <div class="contact-row">
+            <dt>FAX</dt>
+            <dd class="empty">—</dd>
+          </div>
+          <div class="contact-row">
+            <dt>E-MAIL</dt>
+            <dd><a href="mailto:sugeun.yang@inha.ac.kr">sugeun.yang@inha.ac.kr</a></dd>
+          </div>
+          <div class="contact-row">
+            <dt>WEBSITE</dt>
+            <dd><a class="website-link" href="https://op-zhijun.github.io/nanomedic-preview/index.html" target="_blank" rel="noopener noreferrer">op-zhijun.github.io/nanomedic-preview</a></dd>
+          </div>
+          <div class="contact-row">
+            <dt>SCHOLAR</dt>
+            <dd><a class="website-link" href="https://scholar.google.com/citations?user=X1B7JX8AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></dd>
+          </div>
+        </dl>
+      </aside>
+
+      <!-- ── Main ── -->
+      <div class="faculty-main">
+
+        <!-- Education -->
+        <div class="faculty-section">
+          <h3><span class="kr">학력</span><span class="sep">/</span><span class="en">Education</span></h3>
+          <ul class="cv-list">
+            <li>
+              <div class="year">2002&ndash;2006</div>
+              <div class="content">
+                <span class="kr">서울대학교 약학대학 약제학 박사</span>
+                <em class="en">Ph.D. in Pharmaceutics, Seoul National University College of Pharmacy</em>
+              </div>
+            </li>
+            <li>
+              <div class="year">1993&ndash;1995</div>
+              <div class="content">
+                <span class="kr">중앙대학교 약학대학 약제학 석사</span>
+                <em class="en">M.S. in Pharmaceutics, Chungang University College of Pharmacy</em>
+              </div>
+            </li>
+            <li>
+              <div class="year">1989&ndash;1993</div>
+              <div class="content">
+                <span class="kr">중앙대학교 약학대학 약학사</span>
+                <em class="en">B.S. in Pharmacy, Chungang University College of Pharmacy</em>
+              </div>
+            </li>
+            <li>
+              <div class="year">2006&ndash;2009</div>
+              <div class="content">
+                <span class="kr">박사후연구원, UT Southwestern Medical Center (Dallas, TX)</span>
+                <em class="en">Post-Doctoral Researcher, Southwestern Medical Center at Dallas, TX</em>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Experience -->
+        <div class="faculty-section">
+          <h3><span class="kr">경력</span><span class="sep">/</span><span class="en">Professional Experience</span></h3>
+          <ul class="cv-list">
+            <li>
+              <div class="year">2012&ndash;현재</div>
+              <div class="content">
+                <span class="kr">인하대학교 의과대학 교수</span>
+                <em class="en">Professor, Inha University College of Medicine</em>
+              </div>
+            </li>
+            <li>
+              <div class="year">2009&ndash;2012</div>
+              <div class="content">
+                <span class="kr">Utah &amp; Inha DDS and Therapeutics 연구센터 부소장</span>
+                <em class="en">R&amp;D Center Vice Director, Utah and Inha DDS and Therapeutics, Korea</em>
+              </div>
+            </li>
+            <li>
+              <div class="year">2001&ndash;2002</div>
+              <div class="content">
+                <span class="kr">CJ 제일제당 R&amp;D 센터 책임연구원 (제제·약물전달)</span>
+                <em class="en">Chief Researcher, Dept. of Pharmaceutics and Drug Delivery, CJ R&amp;D Center</em>
+              </div>
+            </li>
+            <li>
+              <div class="year">1995&ndash;2001</div>
+              <div class="content">
+                <span class="kr">종근당 중앙연구소 제약공학연구실 선임연구원</span>
+                <em class="en">Senior Researcher, Pharmaceutical Engineering Lab., CKD Research Institute, Chong Kun Dang Pharm.</em>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Major publications -->
+        <div class="faculty-section">
+          <h3><span class="kr">주요 논문</span><span class="sep">/</span><span class="en">Major Publications</span></h3>
+          <ol class="pub-list">
+
+            <li class="pub-item">
+              <div class="pub-num"></div>
+              <div class="pub-body">
+                <div class="pub-title">Clinical development of photodynamic agents and therapeutic applications</div>
+                <div class="pub-authors">R Baskaran, J Lee, <span class="self">SG Yang</span></div>
+                <div class="pub-journal">Biomaterials Research 22 (1), 25</div>
+              </div>
+              <div class="pub-stats">
+                <span class="pub-cites">641</span>
+                <span class="pub-cites-label">cites</span>
+                <span class="pub-year">2018</span>
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-num"></div>
+              <div class="pub-body">
+                <div class="pub-title">MRI-visible micellar nanomedicine for targeted drug delivery to lung cancer cells</div>
+                <div class="pub-authors">JS Guthi, <span class="self">SG Yang</span>, G Huang, S Li, C Khemtong, CW Kessinger, M Peyton, et al.</div>
+                <div class="pub-journal">Molecular Pharmaceutics 7 (1), 32&ndash;40</div>
+              </div>
+              <div class="pub-stats">
+                <span class="pub-cites">259</span>
+                <span class="pub-cites-label">cites</span>
+                <span class="pub-year">2010</span>
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-num"></div>
+              <div class="pub-body">
+                <div class="pub-title">β-Lapachone micellar nanotherapeutics for non–small cell lung cancer therapy</div>
+                <div class="pub-authors">E Blanco, EA Bey, C Khemtong, <span class="self">SG Yang</span>, J Setti-Guthi, H Chen, et al.</div>
+                <div class="pub-journal">Cancer Research 70 (10), 3896&ndash;3904</div>
+              </div>
+              <div class="pub-stats">
+                <span class="pub-cites">187</span>
+                <span class="pub-cites-label">cites</span>
+                <span class="pub-year">2010</span>
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-num"></div>
+              <div class="pub-body">
+                <div class="pub-title">Lung-specific delivery of paclitaxel by chitosan-modified PLGA nanoparticles via transient formation of microaggregates</div>
+                <div class="pub-authors">R Yang, <span class="self">SG Yang</span>, WS Shim, F Cui, G Cheng, IW Kim, DD Kim, SJ Chung, et al.</div>
+                <div class="pub-journal">Journal of Pharmaceutical Sciences 98 (3), 970&ndash;984</div>
+              </div>
+              <div class="pub-stats">
+                <span class="pub-cites">171</span>
+                <span class="pub-cites-label">cites</span>
+                <span class="pub-year">2009</span>
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-num"></div>
+              <div class="pub-body">
+                <div class="pub-title">Improved SERS nanoparticles for direct detection of circulating tumor cells in the blood</div>
+                <div class="pub-authors">X Wu, L Luo, S Yang, X Ma, Y Li, C Dong, Y Tian, L Zhang, Z Shen, A Wu</div>
+                <div class="pub-journal">ACS Applied Materials &amp; Interfaces 7 (18), 9965&ndash;9971</div>
+              </div>
+              <div class="pub-stats">
+                <span class="pub-cites">169</span>
+                <span class="pub-cites-label">cites</span>
+                <span class="pub-year">2015</span>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
+        <!-- Cross-link -->
+        <div class="faculty-crosslink">
+          <div class="faculty-crosslink-text">
+            For citation metrics, activity timeline, and full research output —
+          </div>
+          <a href="person-yang.html">View research profile →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">INHA <span>NANOMEDIC</span></div>
+        <div class="footer-links">
+          <a href="about.html">About</a><a href="research.html">Research</a><a href="member.html">Members</a><a href="publication-patent.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2026 Integrated Research Lab for Medicinal Nano and Life Science &middot; Inha University College of Medicine<br>Designed by Zhijun ZHAO</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
