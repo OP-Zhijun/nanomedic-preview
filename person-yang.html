@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prof. Su-Geun Yang — Principal Investigator, Integrated Research Lab for Medicinal Nano and Life Science, Inha University College of Medicine.">
+  <title>Prof. Su-Geun Yang — INHA NANOMEDIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Person-profile specific styles (Pure-inspired) -->
+  <style>
+    /* ── PERSON HERO ── */
+    .person-hero {
+      padding: 140px 56px 56px;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 30%, rgba(26,58,107,0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 15% 80%, rgba(46,196,182,0.05) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1628 0%, #0d1f3c 60%, #071220 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .person-hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        radial-gradient(circle, rgba(74,144,196,0.18) 1px, transparent 1px);
+      background-size: 48px 48px;
+      background-position: 0 0;
+      opacity: 0.6;
+    }
+    .person-hero-inner {
+      max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .person-hero-photo {
+      width: 220px; height: 220px; border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(46,196,182,0.35);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .person-hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .person-hero-tag::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--teal);
+    }
+    .person-hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      font-weight: 400; line-height: 1.12;
+      margin-bottom: 6px;
+    }
+    .person-hero-name em { font-style: italic; color: var(--teal); }
+    .person-hero-role {
+      font-family: 'DM Mono', monospace; font-size: 0.8rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 18px;
+    }
+    .person-hero-affil {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--text-secondary); max-width: 540px;
+    }
+    .person-hero-contact {
+      margin-top: 18px;
+      display: flex; flex-wrap: wrap; gap: 10px 22px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.06em;
+    }
+    .person-hero-contact a {
+      color: var(--teal);
+      border-bottom: 1px solid rgba(46,196,182,0.4);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .person-hero-contact a:hover { color: var(--white); border-color: var(--white); }
+    @media (max-width: 720px) {
+      .person-hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .person-hero-photo { margin: 0 auto; width: 180px; height: 180px; }
+      .person-hero-contact { justify-content: center; }
+      .person-hero-tag { justify-content: center; }
+      .person-hero-affil { margin: 0 auto; }
+    }
+
+    /* ── METRICS STRIP ── */
+    .metrics-strip {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 36px 56px;
+    }
+    .metrics-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .metric-cell {
+      text-align: center;
+      padding: 12px 16px;
+      border-right: 1px solid var(--border-light);
+    }
+    .metric-cell:last-child { border-right: none; }
+    .metric-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 300; color: var(--teal);
+      line-height: 1; margin-bottom: 6px;
+    }
+    .metric-value.empty {
+      color: var(--muted); opacity: 0.4; font-size: 1.8rem;
+    }
+    .metric-label {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .metric-sub {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      color: var(--muted); opacity: 0.7; margin-top: 4px;
+    }
+    @media (max-width: 720px) {
+      .metrics-inner { grid-template-columns: repeat(2, 1fr); }
+      .metric-cell { border-right: none; border-bottom: 1px solid var(--border-light); padding: 20px 12px; }
+    }
+
+    /* ── ACTIVITY TIMELINE ── */
+    .timeline-section {
+      padding: 64px 56px;
+      background: var(--navy);
+    }
+    .timeline-inner { max-width: 1200px; margin: 0 auto; }
+    .timeline-heading {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+    }
+    .timeline-heading h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; color: var(--white);
+    }
+    .timeline-heading h3 em { font-style: italic; color: var(--teal); }
+    .timeline-heading .note {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+    }
+    .timeline-chart { width: 100%; overflow-x: auto; padding-bottom: 8px; }
+    .timeline-bars {
+      display: flex; align-items: flex-end;
+      gap: 4px; height: 140px;
+      border-bottom: 1px solid var(--border);
+      padding: 0 6px 0 0;
+      min-width: 640px;
+    }
+    .timeline-bar {
+      flex: 1 1 0; min-width: 18px;
+      background: linear-gradient(180deg, var(--teal) 0%, var(--teal-dark) 100%);
+      opacity: 0.85;
+      position: relative;
+      transition: opacity 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .timeline-bar:hover { opacity: 1; transform: translateY(-3px); }
+    .timeline-bar::before {
+      content: attr(data-count);
+      position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      color: var(--teal); opacity: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .timeline-bar:hover::before { opacity: 1; }
+    .timeline-years {
+      display: flex; gap: 4px;
+      margin-top: 8px; padding: 0 6px 0 0;
+      min-width: 640px;
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--muted); letter-spacing: 0.05em;
+    }
+    .timeline-year {
+      flex: 1 1 0; min-width: 18px; text-align: center;
+    }
+
+    /* ── TABS (scrollspy) ── */
+    .person-tabs {
+      position: sticky; top: var(--nav-height); z-index: 50;
+      background: rgba(10,22,40,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+    }
+    .person-tabs-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; gap: 32px;
+      padding: 16px 56px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .person-tabs-inner::-webkit-scrollbar { display: none; }
+    .person-tab {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer;
+      padding: 6px 0; white-space: nowrap;
+      border: none; background: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .person-tab:hover { color: var(--white); }
+    .person-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+    /* ── PROFILE SECTIONS ── */
+    .profile-section {
+      padding: 96px 56px;
+      scroll-margin-top: calc(var(--nav-height) + 60px);
+    }
+    .profile-section-inner { max-width: 1100px; margin: 0 auto; }
+    .profile-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400; line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .profile-section h2 em { font-style: italic; color: var(--teal); }
+    .profile-section .section-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .profile-section .section-sub::after {
+      content: ''; flex: 0 0 36px; height: 1px; background: var(--teal); opacity: 0.5;
+    }
+    .profile-section p { color: var(--text-secondary); line-height: 1.85; margin-bottom: 14px; }
+    .profile-section ul { list-style: none; padding: 0; }
+    .profile-section ul li {
+      padding: 10px 0 10px 22px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      position: relative;
+    }
+    .profile-section ul li::before {
+      content: '▸';
+      position: absolute; left: 0; top: 10px;
+      color: var(--teal); opacity: 0.7;
+    }
+    .profile-section ul li:last-child { border-bottom: none; }
+
+    /* Overview grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      margin-top: 48px;
+    }
+    @media (max-width: 860px) { .overview-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    .overview-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      padding: 32px 32px;
+    }
+    .overview-block h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 500; color: var(--white);
+      margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── FINGERPRINT ── */
+    .fingerprint-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 40px;
+    }
+    .fp-row {
+      display: grid;
+      grid-template-columns: 260px 1fr 60px;
+      align-items: center;
+      gap: 16px;
+    }
+    .fp-label {
+      font-size: 0.9rem; color: var(--white);
+      font-weight: 400;
+    }
+    .fp-bar-track {
+      height: 10px;
+      background: rgba(74,144,196,0.08);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .fp-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal) 0%, var(--accent) 100%);
+      transition: width 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+      width: 0;
+    }
+    .fp-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; color: var(--teal);
+      text-align: right;
+    }
+    @media (max-width: 720px) {
+      .fp-row { grid-template-columns: 1fr; gap: 4px; }
+      .fp-pct { text-align: left; }
+    }
+    .fp-note {
+      margin-top: 32px;
+      padding: 16px 20px;
+      background: rgba(74,144,196,0.04);
+      border-left: 2px solid var(--teal);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── RESEARCH OUTPUT LIST ── */
+    .output-list { margin-top: 40px; }
+    .output-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 100px;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: start;
+    }
+    .output-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; color: var(--teal); font-weight: 400;
+    }
+    .output-title {
+      font-size: 0.98rem; color: var(--white);
+      line-height: 1.5; margin-bottom: 6px;
+    }
+    .output-journal {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .output-link {
+      text-align: right;
+    }
+    @media (max-width: 720px) {
+      .output-row { grid-template-columns: 1fr; gap: 8px; }
+      .output-link { text-align: left; }
+    }
+    .output-footer {
+      margin-top: 32px; text-align: center;
+    }
+
+    /* ── PLACEHOLDER BLOCK ── */
+    .placeholder-block {
+      margin-top: 40px;
+      padding: 56px 40px;
+      background: rgba(74,144,196,0.04);
+      border: 1px dashed var(--border);
+      text-align: center;
+    }
+    .placeholder-block p {
+      color: var(--muted); font-size: 0.95rem;
+      max-width: 540px; margin: 0 auto;
+    }
+    .placeholder-block .placeholder-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; color: var(--teal); opacity: 0.5;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav>
+    <a class="nav-logo" href="index.html">INHA <span>NANOMEDIC</span></a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="member.html" class="active">Members</a></li>
+      <li><a href="publication-patent.html">Publications</a></li>
+      <li><a href="lab-facilities.html">Facilities</a></li>
+      <li><a href="lab-activities.html">Gallery</a></li>
+      <li><a href="benefit.html">Benefit</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ PERSON HERO ═══ -->
+  <header class="person-hero">
+    <div class="person-hero-inner fade-in">
+      <img class="person-hero-photo" src="assets/images/members/prof-yang-hires.png" alt="Prof. Su-Geun Yang">
+      <div>
+        <div class="person-hero-tag">Principal Investigator</div>
+        <h1 class="person-hero-name">Su-Geun <em>Yang</em>, Ph.D</h1>
+        <div class="person-hero-role">Professor &middot; Inha University</div>
+        <div class="person-hero-affil">
+          Department of Biomedical Science (BK21 Program)<br>
+          Inha University College of Medicine &amp; Inha University Hospital<br>
+          Integrated Research Lab for Medicinal Nano and Life Science
+        </div>
+        <div class="person-hero-contact">
+          <span>E-mail: <a href="mailto:sugeun.yang@inha.ac.kr">sugeun.yang@inha.ac.kr</a></span>
+          <a href="https://scholar.google.com/citations?user=X1B7JX8AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar →</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ METRICS STRIP ═══ -->
+  <section class="metrics-strip" style="padding: 36px 56px;">
+    <div class="metrics-inner">
+      <div class="metric-cell">
+        <div class="metric-value stat-number" data-count="4360">4,360</div>
+        <div class="metric-label">Citations</div>
+        <div class="metric-sub">2,418 in last 5y</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value stat-number" data-count="35">35</div>
+        <div class="metric-label">h-index</div>
+        <div class="metric-sub">25 in last 5y</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value stat-number" data-count="74">74</div>
+        <div class="metric-label">i10-index</div>
+        <div class="metric-sub">59 in last 5y</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value stat-number" data-count="96">96</div>
+        <div class="metric-label">Publications</div>
+        <div class="metric-sub">peer-reviewed</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value">2006–26</div>
+        <div class="metric-label">Active</div>
+        <div class="metric-sub">20 years</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ACTIVITY TIMELINE ═══ -->
+  <section class="timeline-section">
+    <div class="timeline-inner fade-in">
+      <div class="timeline-heading">
+        <h3>Publication <em>activity</em></h3>
+        <span class="note">Peer-reviewed output · 2006 – 2025</span>
+      </div>
+      <div class="timeline-chart">
+        <!-- Bar heights are proportional to max=10 pubs/year (2018, 2023) -->
+        <div class="timeline-bars" id="timeline-bars">
+          <div class="timeline-bar" style="height: 20%" data-count="2 · 2006" data-year="2006"></div>
+          <div class="timeline-bar" style="height: 3%; opacity: 0.25;" data-count="0 · 2007"></div>
+          <div class="timeline-bar" style="height: 3%; opacity: 0.25;" data-count="0 · 2008"></div>
+          <div class="timeline-bar" style="height: 60%" data-count="6 · 2009"></div>
+          <div class="timeline-bar" style="height: 40%" data-count="4 · 2010"></div>
+          <div class="timeline-bar" style="height: 30%" data-count="3 · 2011"></div>
+          <div class="timeline-bar" style="height: 60%" data-count="6 · 2012"></div>
+          <div class="timeline-bar" style="height: 20%" data-count="2 · 2013"></div>
+          <div class="timeline-bar" style="height: 50%" data-count="5 · 2014"></div>
+          <div class="timeline-bar" style="height: 60%" data-count="6 · 2015"></div>
+          <div class="timeline-bar" style="height: 40%" data-count="4 · 2016"></div>
+          <div class="timeline-bar" style="height: 40%" data-count="4 · 2017"></div>
+          <div class="timeline-bar" style="height: 100%" data-count="10 · 2018"></div>
+          <div class="timeline-bar" style="height: 50%" data-count="5 · 2019"></div>
+          <div class="timeline-bar" style="height: 40%" data-count="4 · 2020"></div>
+          <div class="timeline-bar" style="height: 50%" data-count="5 · 2021"></div>
+          <div class="timeline-bar" style="height: 80%" data-count="8 · 2022"></div>
+          <div class="timeline-bar" style="height: 100%" data-count="10 · 2023"></div>
+          <div class="timeline-bar" style="height: 50%" data-count="5 · 2024"></div>
+          <div class="timeline-bar" style="height: 70%" data-count="7 · 2025"></div>
+        </div>
+        <div class="timeline-years">
+          <div class="timeline-year">'06</div>
+          <div class="timeline-year">'07</div>
+          <div class="timeline-year">'08</div>
+          <div class="timeline-year">'09</div>
+          <div class="timeline-year">'10</div>
+          <div class="timeline-year">'11</div>
+          <div class="timeline-year">'12</div>
+          <div class="timeline-year">'13</div>
+          <div class="timeline-year">'14</div>
+          <div class="timeline-year">'15</div>
+          <div class="timeline-year">'16</div>
+          <div class="timeline-year">'17</div>
+          <div class="timeline-year">'18</div>
+          <div class="timeline-year">'19</div>
+          <div class="timeline-year">'20</div>
+          <div class="timeline-year">'21</div>
+          <div class="timeline-year">'22</div>
+          <div class="timeline-year">'23</div>
+          <div class="timeline-year">'24</div>
+          <div class="timeline-year">'25</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TAB NAVIGATION (sticky scrollspy) ═══ -->
+  <div class="person-tabs">
+    <div class="person-tabs-inner">
+      <button class="person-tab active" data-target="overview">Overview</button>
+      <button class="person-tab" data-target="fingerprint">Fingerprint</button>
+      <button class="person-tab" data-target="network">Network</button>
+      <button class="person-tab" data-target="research-output">Research output</button>
+      <button class="person-tab" data-target="projects">Projects</button>
+    </div>
+  </div>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <section class="profile-section" id="overview" style="background: var(--navy);">
+    <div class="profile-section-inner fade-in">
+      <div class="section-sub">Overview</div>
+      <h2>Research <em>profile</em></h2>
+      <p style="max-width: 780px;">
+        Prof. Yang's laboratory develops high-performance hybrid drug delivery systems, space-medicine platforms, and stimuli-responsive smart medical devices. The group specializes in drug synthesis, medical device design, and biomaterial preparation &mdash; translating polymer nanomedicine into clinical and space-health applications. Current focus areas include cancer immunotherapy, organelle-targeted therapeutics, and spaceflight-accelerated aging research.
+      </p>
+
+      <div class="overview-grid">
+        <div class="overview-block">
+          <h3>Education</h3>
+          <ul>
+            <li>1989&ndash;1993: B.S. in Pharmacy, Chungang University College of Pharmacy, Korea</li>
+            <li>1993&ndash;1995: M.S. in Pharmaceutics, Chungang University College of Pharmacy, Korea</li>
+            <li>2002&ndash;2006: Ph.D. in Pharmaceutics, Seoul National University College of Pharmacy, Korea</li>
+            <li>2006&ndash;2009: Post-Doctoral Researcher, Southwestern Medical Center at Dallas, TX</li>
+          </ul>
+        </div>
+        <div class="overview-block">
+          <h3>Professional Experience</h3>
+          <ul>
+            <li>1995&ndash;2001: Senior Researcher, Pharmaceutical Engineering Lab., CKD Research Institute, Chong Kun Dang Pharm., Korea</li>
+            <li>2001&ndash;2002: Chief Researcher, Dept. of Pharmaceutics and Drug Delivery, R&amp;D center, CJ 제일, Korea</li>
+            <li>2009&ndash;2012: R&amp;D Center Vice Director, Utah and Inha DDS and Therapeutics, Korea</li>
+            <li>2012&ndash;present: Professor, Inha University College of Medicine</li>
+          </ul>
+        </div>
+        <div class="overview-block" style="grid-column: 1 / -1;">
+          <h3>Research Interests</h3>
+          <ul>
+            <li>Protein / peptide drug delivery systems</li>
+            <li>Photo-responsive polymeric drug delivery</li>
+            <li>Nanomedicine and nanoparticle formulation</li>
+            <li>Drug-eluting medical devices</li>
+            <li>Bio-adhesive hydrogels</li>
+            <li>Immune target therapy &middot; polymer&ndash;drug conjugate &middot; photo-responsive therapy <span style="font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--muted); margin-left: 8px;">(self-declared, Google Scholar)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FINGERPRINT ═══ -->
+  <section class="profile-section" id="fingerprint" style="background: var(--navy);">
+    <div class="profile-section-inner fade-in">
+      <div class="section-sub">Fingerprint</div>
+      <h2>Research <em>topics</em></h2>
+      <p style="max-width: 780px;">
+        Topic strengths across 96 peer-reviewed publications. Weights are derived from keyword frequency in publication titles &mdash; normalized so the strongest topic reads 100%.
+      </p>
+
+      <div class="fingerprint-grid" id="fingerprint-grid">
+        <div class="fp-row"><div class="fp-label">Cancer Therapy</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="100"></div></div><div class="fp-pct">100%</div></div>
+        <div class="fp-row"><div class="fp-label">Nanoparticles / Nanotechnology</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="72"></div></div><div class="fp-pct">72%</div></div>
+        <div class="fp-row"><div class="fp-label">Hepatic / GI Disease</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="69"></div></div><div class="fp-pct">69%</div></div>
+        <div class="fp-row"><div class="fp-label">Polymeric Biomaterials</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="53"></div></div><div class="fp-pct">53%</div></div>
+        <div class="fp-row"><div class="fp-label">Photodynamic / Photothermal Therapy</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="50"></div></div><div class="fp-pct">50%</div></div>
+        <div class="fp-row"><div class="fp-label">Implantable Medical Devices</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="50"></div></div><div class="fp-pct">50%</div></div>
+        <div class="fp-row"><div class="fp-label">MRI Contrast Agents</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="47"></div></div><div class="fp-pct">47%</div></div>
+        <div class="fp-row"><div class="fp-label">Drug Delivery Systems</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="34"></div></div><div class="fp-pct">34%</div></div>
+        <div class="fp-row"><div class="fp-label">Drug Formulation</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="31"></div></div><div class="fp-pct">31%</div></div>
+        <div class="fp-row"><div class="fp-label">Space Medicine</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="12"></div></div><div class="fp-pct">12%</div></div>
+        <div class="fp-row"><div class="fp-label">Hepatocellular / Cholangiocarcinoma</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="9"></div></div><div class="fp-pct">9%</div></div>
+        <div class="fp-row"><div class="fp-label">Immunotherapy</div><div class="fp-bar-track"><div class="fp-bar-fill" data-pct="6"></div></div><div class="fp-pct">6%</div></div>
+      </div>
+
+      <div class="fp-note">
+        Note: Unlike Elsevier Pure's fingerprint (which uses controlled-vocabulary concept mapping over abstracts), this chart is a lightweight keyword-frequency estimate computed from the 96 publication titles listed on the Publications page. It is indicative of research focus rather than authoritative.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ NETWORK ═══ -->
+  <section class="profile-section" id="network" style="background: var(--navy);">
+    <div class="profile-section-inner fade-in">
+      <div class="section-sub">Network</div>
+      <h2>Collaborations &amp; <em>co-authors</em></h2>
+      <p style="max-width: 780px;">
+        Network view — collaborator institutions and co-authorship graph. Pure generates this from Scopus-indexed co-author affiliations.
+      </p>
+
+      <div class="placeholder-block">
+        <div class="placeholder-icon">⊕</div>
+        <p>Co-author network and collaborator map will appear here once affiliation data is extracted from Scopus. For now, see the <a href="publication-patent.html" style="color: var(--teal); border-bottom: 1px solid var(--teal);">Publications</a> page for per-paper author lists.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ RESEARCH OUTPUT ═══ -->
+  <section class="profile-section" id="research-output" style="background: var(--navy);">
+    <div class="profile-section-inner fade-in">
+      <div class="section-sub">Research output</div>
+      <h2>Recent <em>publications</em></h2>
+      <p style="max-width: 780px;">
+        Five most recent peer-reviewed publications. Full list of 96 papers on the
+        <a href="publication-patent.html" style="color: var(--teal); border-bottom: 1px solid var(--teal);">Publications page</a>.
+      </p>
+
+      <div class="output-list">
+        <div class="output-row">
+          <div class="output-year">2025</div>
+          <div>
+            <div class="output-title">Thermosensitive chitosan/collagen hydrogel with antibacterial zinc oxide and silver nanoparticles from aqueous fingerroot extract for alveolar bone applications</div>
+            <div class="output-journal">Carbohydrate Polymer Technologies and Applications</div>
+          </div>
+          <div class="output-link"><a href="https://doi.org/10.1016/j.carpta.2025.101029" target="_blank" rel="noopener noreferrer" class="btn-outline btn-small">DOI</a></div>
+        </div>
+        <div class="output-row">
+          <div class="output-year">2025</div>
+          <div>
+            <div class="output-title">Cholesterol-Conjugated Polyion Complex Nanoparticles for Combination Delivery of Hydrophobic Paclitaxel and Hydrophilic miR-34a for Colon Cancer Therapy</div>
+            <div class="output-journal">International Journal of Molecular Sciences</div>
+          </div>
+          <div class="output-link"><a href="https://doi.org/10.3390/ijms26167965" target="_blank" rel="noopener noreferrer" class="btn-outline btn-small">DOI</a></div>
+        </div>
+        <div class="output-row">
+          <div class="output-year">2025</div>
+          <div>
+            <div class="output-title">KRAS mutant colon cancer-targeted induction of ferroptosis via photocatalytic activation of BiVO₄-embedded silica nano with cascadic downregulation of GPX4/xCT axis</div>
+            <div class="output-journal">Acta Pharmaceutica Sinica B</div>
+          </div>
+          <div class="output-link"><a href="https://doi.org/10.1016/j.apsb.2025.06.024" target="_blank" rel="noopener noreferrer" class="btn-outline btn-small">DOI</a></div>
+        </div>
+        <div class="output-row">
+          <div class="output-year">2025</div>
+          <div>
+            <div class="output-title">Cellular changes in an in vitro neural circuit system under simulated microgravity</div>
+            <div class="output-journal">Acta Biomaterialia</div>
+          </div>
+          <div class="output-link"><a href="https://doi.org/10.1016/j.actbio.2025.08.023" target="_blank" rel="noopener noreferrer" class="btn-outline btn-small">DOI</a></div>
+        </div>
+        <div class="output-row">
+          <div class="output-year">2025</div>
+          <div>
+            <div class="output-title">Autophagy-Regulating, Photothermal Polydopamine-Coated, and Photodynamic Zirconium/Porphyrin-Framed Metal–Organic Frameworks for Enhanced Doxorubicin Therapy in Colon Cancer</div>
+            <div class="output-journal">Biomaterials Research</div>
+          </div>
+          <div class="output-link"><a href="https://doi.org/10.34133/bmr.0218" target="_blank" rel="noopener noreferrer" class="btn-outline btn-small">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="output-footer">
+        <a href="publication-patent.html" class="btn-outline">View all 96 publications →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="profile-section" id="projects" style="background: var(--navy);">
+    <div class="profile-section-inner fade-in">
+      <div class="section-sub">Projects</div>
+      <h2>Funded <em>grants</em></h2>
+      <p style="max-width: 780px;">
+        Active and completed research projects funded by NRF, KHIDI, and other agencies.
+      </p>
+
+      <div class="placeholder-block">
+        <div class="placeholder-icon">◇</div>
+        <p>Project records will be populated from the lab's internal grant register. Each entry will list PI / co-investigators, funding agency, period, and linked publications.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">INHA <span>NANOMEDIC</span></div>
+        <div class="footer-links">
+          <a href="about.html">About</a><a href="research.html">Research</a><a href="member.html">Members</a><a href="publication-patent.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2026 Integrated Research Lab for Medicinal Nano and Life Science &middot; Inha University College of Medicine<br>Designed by Zhijun ZHAO</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // ── Fingerprint bar animation on scroll
+    const fpBars = document.querySelectorAll('.fp-bar-fill');
+    if ('IntersectionObserver' in window) {
+      const fpObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.width = entry.target.dataset.pct + '%';
+            fpObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      fpBars.forEach(b => fpObs.observe(b));
+    } else {
+      fpBars.forEach(b => b.style.width = b.dataset.pct + '%');
+    }
+
+    // ── Scrollspy for person tabs
+    const personTabs = document.querySelectorAll('.person-tab');
+    const personSections = Array.from(personTabs).map(t => document.getElementById(t.dataset.target)).filter(Boolean);
+
+    personTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = document.getElementById(tab.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    if ('IntersectionObserver' in window && personSections.length) {
+      const sectionObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            personTabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+          }
+        });
+      }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+      personSections.forEach(s => sectionObs.observe(s));
+    }
+  </script>
+</body>
+</html>
