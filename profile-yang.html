@@ -264,6 +264,119 @@
       .cv-list li { grid-template-columns: 1fr; gap: 4px; }
     }
 
+    /* ── CITED BY (Scholar-style) ── */
+    .cited-by {
+      background: linear-gradient(180deg, rgba(74,144,196,0.06) 0%, rgba(74,144,196,0.02) 100%);
+      border: 1px solid var(--border-light);
+      padding: 28px 32px 24px;
+      margin-bottom: 48px;
+    }
+    .cited-by-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 10px;
+      padding-bottom: 14px; margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cited-by-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 500; color: var(--white);
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    .cited-by-title .kr {
+      font-family: 'Noto Serif KR', serif; color: var(--teal);
+      font-weight: 500; font-size: 1.2rem;
+    }
+    .cited-by-title .sep { color: var(--muted); opacity: 0.4; }
+    .cited-by-title .en { font-style: italic; }
+    .cited-by-source {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .cited-by-source a {
+      color: var(--teal); border-bottom: 1px solid rgba(46,196,182,0.3);
+      padding-bottom: 1px;
+    }
+
+    .cited-by-table {
+      width: 100%; border-collapse: collapse;
+      margin-bottom: 28px;
+    }
+    .cited-by-table thead th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); font-weight: 500;
+      padding: 8px 10px; text-align: right;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .cited-by-table thead th:first-child { text-align: left; }
+    .cited-by-table tbody th {
+      font-family: 'DM Sans', sans-serif; font-weight: 400;
+      color: var(--text-secondary); font-size: 0.9rem;
+      padding: 10px 10px; text-align: left;
+    }
+    .cited-by-table tbody td {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300; color: var(--teal);
+      padding: 10px 10px; text-align: right;
+      line-height: 1;
+    }
+    .cited-by-table tbody tr {
+      border-bottom: 1px solid var(--border-light);
+    }
+    .cited-by-table tbody tr:last-child { border-bottom: none; }
+
+    .cites-chart {
+      padding-top: 8px;
+    }
+    .cites-chart-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px;
+      display: flex; justify-content: space-between;
+    }
+    .cites-bars {
+      display: flex; align-items: flex-end; gap: 3px;
+      height: 110px;
+      border-bottom: 1px solid var(--border);
+      padding: 0 4px 0 0;
+      position: relative;
+    }
+    .cites-bar {
+      flex: 1 1 0; min-width: 12px;
+      background: linear-gradient(180deg, var(--accent) 0%, var(--blue) 100%);
+      opacity: 0.78;
+      position: relative;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .cites-bar.partial {
+      background: linear-gradient(180deg, var(--accent) 0%, var(--blue) 100%);
+      opacity: 0.45;
+    }
+    .cites-bar:hover { opacity: 1; transform: translateY(-2px); }
+    .cites-bar::before {
+      content: attr(data-tip);
+      position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--teal); white-space: nowrap;
+      opacity: 0; transition: opacity 0.15s;
+      pointer-events: none;
+    }
+    .cites-bar:hover::before { opacity: 1; }
+    .cites-years {
+      display: flex; gap: 3px;
+      margin-top: 6px; padding: 0 4px 0 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: var(--muted); letter-spacing: 0.03em;
+    }
+    .cites-year {
+      flex: 1 1 0; min-width: 12px; text-align: center;
+    }
+    @media (max-width: 720px) {
+      .cited-by { padding: 20px 18px; }
+      .cites-bars { height: 80px; }
+    }
+
     /* Cross-link footer inside card */
     .faculty-crosslink {
       margin-top: 56px;
@@ -312,8 +425,7 @@
       <aside class="faculty-sidebar">
         <img class="faculty-photo" src="assets/images/members/prof-yang-hires.png" alt="Prof. Su-Geun Yang">
 
-        <!-- Korean name placeholder — user to fill in Hangul -->
-        <div class="faculty-name-ko placeholder" title="Korean name pending">[한글 이름]</div>
+        <div class="faculty-name-ko">양수근</div>
         <div class="faculty-name-en">Yang, Su-Geun, Ph.D</div>
 
         <div class="faculty-title-block">
@@ -348,6 +460,94 @@
 
       <!-- ── Main ── -->
       <div class="faculty-main">
+
+        <!-- Cited by (Google Scholar style) -->
+        <div class="cited-by">
+          <div class="cited-by-head">
+            <div class="cited-by-title">
+              <span class="kr">피인용</span><span class="sep">/</span><span class="en">Cited by</span>
+            </div>
+            <div class="cited-by-source">
+              Source:
+              <a href="https://scholar.google.com/citations?user=X1B7JX8AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            </div>
+          </div>
+
+          <table class="cited-by-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>All</th>
+                <th>Since 2021</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Citations</th>
+                <td>4,360</td>
+                <td>2,418</td>
+              </tr>
+              <tr>
+                <th>h-index</th>
+                <td>35</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <th>i10-index</th>
+                <td>74</td>
+                <td>59</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cites-chart">
+            <div class="cites-chart-label">
+              <span>Citations per year</span>
+              <span>peak · 557 (2025)</span>
+            </div>
+            <!-- Heights proportional to max=557 (2025). 2026 is partial (YTD = 163). -->
+            <div class="cites-bars">
+              <div class="cites-bar" style="height: 6%"   data-tip="31 · 2009"></div>
+              <div class="cites-bar" style="height: 11%"  data-tip="59 · 2010"></div>
+              <div class="cites-bar" style="height: 19%"  data-tip="105 · 2011"></div>
+              <div class="cites-bar" style="height: 19%"  data-tip="106 · 2012"></div>
+              <div class="cites-bar" style="height: 24%"  data-tip="135 · 2013"></div>
+              <div class="cites-bar" style="height: 31%"  data-tip="171 · 2014"></div>
+              <div class="cites-bar" style="height: 29%"  data-tip="160 · 2015"></div>
+              <div class="cites-bar" style="height: 28%"  data-tip="158 · 2016"></div>
+              <div class="cites-bar" style="height: 35%"  data-tip="197 · 2017"></div>
+              <div class="cites-bar" style="height: 34%"  data-tip="188 · 2018"></div>
+              <div class="cites-bar" style="height: 40%"  data-tip="223 · 2019"></div>
+              <div class="cites-bar" style="height: 56%"  data-tip="313 · 2020"></div>
+              <div class="cites-bar" style="height: 60%"  data-tip="335 · 2021"></div>
+              <div class="cites-bar" style="height: 74%"  data-tip="412 · 2022"></div>
+              <div class="cites-bar" style="height: 75%"  data-tip="417 · 2023"></div>
+              <div class="cites-bar" style="height: 96%"  data-tip="532 · 2024"></div>
+              <div class="cites-bar" style="height: 100%" data-tip="557 · 2025"></div>
+              <div class="cites-bar partial" style="height: 29%" data-tip="163 · 2026 (YTD)"></div>
+            </div>
+            <div class="cites-years">
+              <div class="cites-year">'09</div>
+              <div class="cites-year">'10</div>
+              <div class="cites-year">'11</div>
+              <div class="cites-year">'12</div>
+              <div class="cites-year">'13</div>
+              <div class="cites-year">'14</div>
+              <div class="cites-year">'15</div>
+              <div class="cites-year">'16</div>
+              <div class="cites-year">'17</div>
+              <div class="cites-year">'18</div>
+              <div class="cites-year">'19</div>
+              <div class="cites-year">'20</div>
+              <div class="cites-year">'21</div>
+              <div class="cites-year">'22</div>
+              <div class="cites-year">'23</div>
+              <div class="cites-year">'24</div>
+              <div class="cites-year">'25</div>
+              <div class="cites-year">'26</div>
+            </div>
+          </div>
+        </div>
 
         <!-- Education -->
         <div class="faculty-section">
