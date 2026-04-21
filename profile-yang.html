@@ -12,15 +12,41 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
+    /* Reset site-wide fixed padding that assumed a nav */
+    body { padding-top: 0; }
+
     /* ── FACULTY CARD LAYOUT ── */
     .faculty-wrap {
-      padding: 120px 40px 80px;
+      padding: 64px 40px 64px;
       background:
         radial-gradient(ellipse 60% 60% at 75% 30%, rgba(26,58,107,0.35) 0%, transparent 70%),
         radial-gradient(ellipse 45% 45% at 15% 80%, rgba(46,196,182,0.04) 0%, transparent 60%),
         linear-gradient(160deg, #0a1628 0%, #0d1f3c 60%, #071220 100%);
       min-height: 100vh;
     }
+    @media (max-width: 720px) {
+      .faculty-wrap { padding: 32px 16px; }
+    }
+
+    /* ── SOLO PAGE MINIMAL FOOTER ── */
+    .solo-footer {
+      padding: 28px 40px 36px;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.12em;
+      color: var(--muted);
+      background: var(--navy);
+      border-top: 1px solid var(--border-light);
+    }
+    .solo-footer .line {
+      opacity: 0.7;
+    }
+    .solo-footer a {
+      color: var(--teal);
+      border-bottom: 1px solid rgba(46,196,182,0.3);
+      padding-bottom: 1px;
+    }
+    .solo-footer a:hover { color: var(--white); border-color: var(--white); }
     .faculty-card {
       max-width: 1200px; margin: 0 auto;
       display: grid;
@@ -401,25 +427,9 @@
 </head>
 <body>
 
-  <!-- ═══ NAVIGATION ═══ -->
-  <nav>
-    <a class="nav-logo" href="index.html">INHA <span>NANOMEDIC</span></a>
-    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="member.html" class="active">Members</a></li>
-      <li><a href="publication-patent.html">Publications</a></li>
-      <li><a href="lab-facilities.html">Facilities</a></li>
-      <li><a href="lab-activities.html">Gallery</a></li>
-      <li><a href="benefit.html">Benefit</a></li>
-    </ul>
-  </nav>
-
   <!-- ═══ FACULTY CARD ═══ -->
   <section class="faculty-wrap">
-    <div class="faculty-card fade-in">
+    <div class="faculty-card">
 
       <!-- ── Sidebar ── -->
       <aside class="faculty-sidebar">
@@ -709,19 +719,13 @@
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <div class="footer-logo">INHA <span>NANOMEDIC</span></div>
-        <div class="footer-links">
-          <a href="about.html">About</a><a href="research.html">Research</a><a href="member.html">Members</a><a href="publication-patent.html">Publications</a>
-        </div>
-      </div>
-      <div class="footer-copy">&copy; 2026 Integrated Research Lab for Medicinal Nano and Life Science &middot; Inha University College of Medicine<br>Designed by Zhijun ZHAO</div>
+  <!-- ═══ MINIMAL SOLO FOOTER ═══ -->
+  <footer class="solo-footer">
+    <div class="line">&copy; 2026 &middot; Yang, Su-Geun &middot; 양수근 &middot; Inha University College of Medicine</div>
+    <div class="line" style="margin-top: 6px;">
+      For the lab, visit
+      <a href="https://op-zhijun.github.io/nanomedic-preview/index.html">INHA NANOMEDIC</a>
     </div>
   </footer>
-
-  <script src="js/main.js"></script>
 </body>
 </html>
